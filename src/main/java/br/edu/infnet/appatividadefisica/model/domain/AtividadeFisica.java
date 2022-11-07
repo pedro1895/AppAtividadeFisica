@@ -1,7 +1,15 @@
 package br.edu.infnet.appatividadefisica.model.domain;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "t_atividade_fisica")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class AtividadeFisica {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private float valor;

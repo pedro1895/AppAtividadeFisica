@@ -1,11 +1,21 @@
 package br.edu.infnet.appatividadefisica.model.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "t_solicitante")
 public class Solicitante {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private String cpf;
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
 
     @Override
     public String toString() {
@@ -42,5 +52,13 @@ public class Solicitante {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

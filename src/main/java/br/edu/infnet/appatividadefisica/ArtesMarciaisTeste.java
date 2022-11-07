@@ -2,6 +2,8 @@ package br.edu.infnet.appatividadefisica;
 
 import br.edu.infnet.appatividadefisica.controller.ArtesMarciaisController;
 import br.edu.infnet.appatividadefisica.model.domain.ArtesMarciais;
+import br.edu.infnet.appatividadefisica.model.service.ArtesMarciaisService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
@@ -11,6 +13,12 @@ import org.springframework.stereotype.Component;
 @Order(4)
 @Component
 public class ArtesMarciaisTeste implements ApplicationRunner {
+
+    private final ArtesMarciaisService artesMarciaisService;
+
+    public ArtesMarciaisTeste(ArtesMarciaisService artesMarciaisService) {
+        this.artesMarciaisService = artesMarciaisService;
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -23,7 +31,7 @@ public class ArtesMarciaisTeste implements ApplicationRunner {
         s1.setEquipamento(false);
         s1.setTurma("ABCD111");
         s1.setProfessor("Paulo");
-        ArtesMarciaisController.incluir(s1);
+        artesMarciaisService.incluir(s1);
 
         ArtesMarciais s2 = new ArtesMarciais();
         s2.setCodigo(234);
@@ -32,7 +40,7 @@ public class ArtesMarciaisTeste implements ApplicationRunner {
         s2.setEquipamento(true);
         s2.setTurma("ABCD222");
         s2.setProfessor("Elias");
-        ArtesMarciaisController.incluir(s2);
+        artesMarciaisService.incluir(s2);
 
         ArtesMarciais s3 = new ArtesMarciais();
         s3.setCodigo(345);
@@ -41,6 +49,6 @@ public class ArtesMarciaisTeste implements ApplicationRunner {
         s3.setEquipamento(false);
         s3.setTurma("ABCD333");
         s3.setProfessor("Elizeu");
-        ArtesMarciaisController.incluir(s3);
+        artesMarciaisService.incluir(s3);
     }
 }

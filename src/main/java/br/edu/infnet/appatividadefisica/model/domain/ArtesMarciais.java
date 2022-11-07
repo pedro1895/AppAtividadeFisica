@@ -1,5 +1,10 @@
 package br.edu.infnet.appatividadefisica.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "t_artes_marciais")
 public class ArtesMarciais extends AtividadeFisica{
 
     private String professor;

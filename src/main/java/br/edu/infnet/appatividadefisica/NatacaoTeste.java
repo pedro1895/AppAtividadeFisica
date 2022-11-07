@@ -2,6 +2,9 @@ package br.edu.infnet.appatividadefisica;
 
 import br.edu.infnet.appatividadefisica.controller.NatacaoController;
 import br.edu.infnet.appatividadefisica.model.domain.Natacao;
+import br.edu.infnet.appatividadefisica.model.service.MusculacaoService;
+import br.edu.infnet.appatividadefisica.model.service.NatacaoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
@@ -10,6 +13,12 @@ import org.springframework.stereotype.Component;
 @Order(5)
 @Component
 public class NatacaoTeste implements ApplicationRunner {
+
+    private final NatacaoService natacaoService;
+
+    public NatacaoTeste(NatacaoService natacaoService) {
+        this.natacaoService = natacaoService;
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -22,7 +31,7 @@ public class NatacaoTeste implements ApplicationRunner {
         s1.setAquecimento(true);
         s1.setFrequencia(5);
         s1.setInstrutor("José");
-        NatacaoController.incluir(s1);
+        natacaoService.incluir(s1);
 
         Natacao s2 = new Natacao();
         s2.setCodigo(234);
@@ -31,7 +40,7 @@ public class NatacaoTeste implements ApplicationRunner {
         s2.setAquecimento(true);
         s2.setFrequencia(3);
         s2.setInstrutor("Pedro");
-        NatacaoController.incluir(s2);
+        natacaoService.incluir(s2);
 
         Natacao s3 = new Natacao();
         s3.setCodigo(345);
@@ -40,6 +49,6 @@ public class NatacaoTeste implements ApplicationRunner {
         s3.setAquecimento(true);
         s3.setFrequencia(2);
         s3.setInstrutor("João");
-        NatacaoController.incluir(s3);
+        natacaoService.incluir(s3);
     }
 }

@@ -3,16 +3,23 @@ package br.edu.infnet.appatividadefisica;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.infnet.appatividadefisica.controller.AssinaturaController;
+
 import br.edu.infnet.appatividadefisica.model.domain.*;
+import br.edu.infnet.appatividadefisica.model.service.AssinaturaService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Order(1)
+@Order(2)
 @Component
 public class AssinaturaTeste implements ApplicationRunner{
+
+    private final AssinaturaService assinaturaService;
+
+    public AssinaturaTeste(AssinaturaService assinaturaService) {
+        this.assinaturaService = assinaturaService;
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -59,14 +66,14 @@ public class AssinaturaTeste implements ApplicationRunner{
         a1.setDescricao("Primeira assinatura");
         a1.setWeb(true);
         a1.setAtividades(atividadesFisicasPrimeiraAssinatura);
-        AssinaturaController.incluir(a1);
+        assinaturaService.incluir(a1);
 
         Assinatura a2 = new Assinatura();
         a2.setDescricao("Segunda assinatura");
         a2.setWeb(false);
         a2.setSolicitante(s1);
         a2.setAtividades(atividadesFisicasDemaisAssinaturas);
-        AssinaturaController.incluir(a2);
+        assinaturaService.incluir(a2);
 
         Solicitante s2 = new Solicitante();
         s2.setCpf("23423423423");
@@ -77,7 +84,7 @@ public class AssinaturaTeste implements ApplicationRunner{
         a3.setDescricao("Terceira assinatura");
         a3.setSolicitante(s2);
         a3.setAtividades(atividadesFisicasDemaisAssinaturas);
-        AssinaturaController.incluir(a3);
+        assinaturaService.incluir(a3);
 
     }
 }

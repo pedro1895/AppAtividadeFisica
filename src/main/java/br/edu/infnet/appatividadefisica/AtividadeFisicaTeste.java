@@ -5,6 +5,9 @@ import br.edu.infnet.appatividadefisica.controller.AtividadeFisicaController;
 import br.edu.infnet.appatividadefisica.model.domain.ArtesMarciais;
 import br.edu.infnet.appatividadefisica.model.domain.Musculacao;
 import br.edu.infnet.appatividadefisica.model.domain.Natacao;
+import br.edu.infnet.appatividadefisica.model.service.AssinaturaService;
+import br.edu.infnet.appatividadefisica.model.service.AtividadeFisicaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
@@ -14,6 +17,12 @@ import org.springframework.stereotype.Component;
 @Order(3)
 @Component
 public class AtividadeFisicaTeste implements ApplicationRunner{
+
+    private final AtividadeFisicaService atividadeFisicaService;
+
+    public AtividadeFisicaTeste(AtividadeFisicaService atividadeFisicaService) {
+        this.atividadeFisicaService = atividadeFisicaService;
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -26,7 +35,7 @@ public class AtividadeFisicaTeste implements ApplicationRunner{
         natacao.setAquecimento(false);
         natacao.setInstrutor("Pedro");
         natacao.setFrequencia(5);
-        AtividadeFisicaController.incluir(natacao);
+        atividadeFisicaService.incluir(natacao);
 
         Musculacao musculacao = new Musculacao();
         musculacao.setCodigo(123);
@@ -34,7 +43,7 @@ public class AtividadeFisicaTeste implements ApplicationRunner{
         musculacao.setValor(10);
         musculacao.setPersonal("João");
         musculacao.setSpinning(false);
-        AtividadeFisicaController.incluir(musculacao);
+        atividadeFisicaService.incluir(musculacao);
 
         ArtesMarciais artesMarciais = new ArtesMarciais();
         artesMarciais.setCodigo(123);
@@ -43,6 +52,6 @@ public class AtividadeFisicaTeste implements ApplicationRunner{
         artesMarciais.setEquipamento(true);
         artesMarciais.setTurma("Turma 111");
         artesMarciais.setProfessor("Lucas");
-        AtividadeFisicaController.incluir(artesMarciais);
+        atividadeFisicaService.incluir(artesMarciais);
     }
 }

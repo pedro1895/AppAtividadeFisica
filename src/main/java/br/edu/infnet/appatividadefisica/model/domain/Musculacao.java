@@ -1,5 +1,11 @@
 package br.edu.infnet.appatividadefisica.model.domain;
 
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "t_musculacao")
 public class Musculacao extends AtividadeFisica{
 
     private String personal;

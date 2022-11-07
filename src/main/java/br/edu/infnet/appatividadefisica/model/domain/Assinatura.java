@@ -1,14 +1,26 @@
 package br.edu.infnet.appatividadefisica.model.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "t_assinatura")
 public class Assinatura {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String descricao;
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime data;
     private boolean web;
+    @Transient
     private Solicitante solicitante;
+    @Transient
     private List<AtividadeFisica> atividades;
 
 

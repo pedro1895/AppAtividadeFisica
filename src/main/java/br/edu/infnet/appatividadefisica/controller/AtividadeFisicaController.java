@@ -5,44 +5,45 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.edu.infnet.appatividadefisica.model.domain.AtividadeFisica;
+import br.edu.infnet.appatividadefisica.model.domain.AtividadeFisica;
+import br.edu.infnet.appatividadefisica.model.service.AtividadeFisicaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
 public class AtividadeFisicaController {
 
-    private static Map<Integer, AtividadeFisica> mapa = new HashMap<Integer, AtividadeFisica>();
-    private static Integer id = 1;
+    @Autowired
+    private AtividadeFisicaService atividadeFisicaService;
 
-    public static void incluir(AtividadeFisica atividadefisica) {
-        atividadefisica.setId(id++);
-        mapa.put(atividadefisica.getId(), atividadefisica);
-
-        System.out.println("> " + atividadefisica);
+    @GetMapping(value = "/atividadefisica")
+    public String telaCadastro() {
+        return "atividadefisica/cadastro";
     }
 
-    public static void excluir(Integer id) {
-        mapa.remove(id);
-    }
+    @PostMapping(value = "/atividadefisica/incluir")
+    public void incluir(AtividadeFisica atividadeFisica) {
+        atividadeFisicaService.incluir(atividadeFisica);
 
-    public static Collection<AtividadeFisica> obterLista(){
-        return mapa.values();
+        System.out.println("> " + atividadeFisica);
     }
 
     @GetMapping(value = "/atividadefisica/lista")
     public String telaLista(Model model) {
-        model.addAttribute("listagem", obterLista());
+        model.addAttribute("listagem", atividadeFisicaService.obterLista());
 
         return "atividadefisica/lista";
     }
 
     @GetMapping(value = "/atividadefisica/{id}/excluir")
-    public String exclusao(@PathVariable Integer id) {
+    public String excluir(@PathVariable Integer id) {
 
-        excluir(id);
+        atividadeFisicaService.excluir(id);
 
         return "redirect:/atividadefisica/lista";
     }
